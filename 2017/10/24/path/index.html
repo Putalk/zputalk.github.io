@@ -15,17 +15,17 @@
     <meta name="keywords" content="前端开发,html,css,vue,react,nodejs,JavaScript" />
   
 
-  <meta name="description" content="#path.join()连接path的片段，并生成规范的路径，长度为0的path会被忽略。连接后如果为一个长度为0的字符串则为 ‘.’,为当前这个目录。123const path = require(&apos;path&apos;);const indexPath = path.join(&apos;/app&apos;, &apos;/home&apos;, &apos;tab&apos;, &apos;..&apos;)console.log(indexPath) // /app/home">
+  <meta name="description" content="path.join()连接path的片段，并生成规范的路径，长度为0的path会被忽略。连接后如果为一个长度为0的字符串则为 ‘.’,为当前这个目录。123const path = require(&apos;path&apos;);const indexPath = path.join(&apos;/app&apos;, &apos;/home&apos;, &apos;tab&apos;, &apos;..&apos;)console.log(indexPath) // /app/home">
 <meta property="og:type" content="article">
 <meta property="og:title" content="path">
 <meta property="og:url" content="http://zputalk.com/2017/10/24/path/index.html">
 <meta property="og:site_name" content="pu">
-<meta property="og:description" content="#path.join()连接path的片段，并生成规范的路径，长度为0的path会被忽略。连接后如果为一个长度为0的字符串则为 ‘.’,为当前这个目录。123const path = require(&apos;path&apos;);const indexPath = path.join(&apos;/app&apos;, &apos;/home&apos;, &apos;tab&apos;, &apos;..&apos;)console.log(indexPath) // /app/home">
+<meta property="og:description" content="path.join()连接path的片段，并生成规范的路径，长度为0的path会被忽略。连接后如果为一个长度为0的字符串则为 ‘.’,为当前这个目录。123const path = require(&apos;path&apos;);const indexPath = path.join(&apos;/app&apos;, &apos;/home&apos;, &apos;tab&apos;, &apos;..&apos;)console.log(indexPath) // /app/home">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-10-24T14:29:01.000Z">
+<meta property="og:updated_time" content="2017-10-24T14:30:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="path">
-<meta name="twitter:description" content="#path.join()连接path的片段，并生成规范的路径，长度为0的path会被忽略。连接后如果为一个长度为0的字符串则为 ‘.’,为当前这个目录。123const path = require(&apos;path&apos;);const indexPath = path.join(&apos;/app&apos;, &apos;/home&apos;, &apos;tab&apos;, &apos;..&apos;)console.log(indexPath) // /app/home">
+<meta name="twitter:description" content="path.join()连接path的片段，并生成规范的路径，长度为0的path会被忽略。连接后如果为一个长度为0的字符串则为 ‘.’,为当前这个目录。123const path = require(&apos;path&apos;);const indexPath = path.join(&apos;/app&apos;, &apos;/home&apos;, &apos;tab&apos;, &apos;..&apos;)console.log(indexPath) // /app/home">
 
   
 
@@ -173,7 +173,7 @@
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#dirname-和-filename"><span class="toc-text">dirname 和 filename</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#path-join"><span class="toc-text">path.join()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#path-resolve"><span class="toc-text">path.resolve()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dirname-和-filename"><span class="toc-text">dirname 和 filename</span></a></li></ol>
   </div>
 
 
@@ -221,8 +221,8 @@
 
   <div class="article-content">
     
-      <p>#path.join()<br>连接path的片段，并生成规范的路径，长度为0的path会被忽略。连接后如果为一个长度为0的字符串则为 ‘.’,为当前这个目录。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"><span class="keyword">const</span> indexPath = path.join(<span class="string">'/app'</span>, <span class="string">'/home'</span>, <span class="string">'tab'</span>, <span class="string">'..'</span>)</div><div class="line"><span class="built_in">console</span>.log(indexPath) <span class="comment">// /app/home</span></div></pre></td></tr></table></figure></p>
-<p>#path.resolve()<br>会解析一个路径或者路径片段为一个绝对路径，在给定的路径中从右向左进行处理。长度为0的path会被忽略。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"><span class="keyword">const</span> indexPath = path.resolve(<span class="string">'/app'</span>, <span class="string">'/home'</span>, <span class="string">'/A'</span>, <span class="string">'/B'</span>, <span class="string">'/C'</span>, <span class="string">'../D'</span>)</div><div class="line">其实就是调用终端的cd 和 pwd命令</div><div class="line">cd app</div><div class="line">cd home</div><div class="line">cd A</div><div class="line">cd B</div><div class="line">cd C</div><div class="line">cd ../D</div><div class="line">pwd  输出: app/home/A/B/D</div></pre></td></tr></table></figure></p>
+      <h1 id="path-join"><a href="#path-join" class="headerlink" title="path.join()"></a>path.join()</h1><p>连接path的片段，并生成规范的路径，长度为0的path会被忽略。连接后如果为一个长度为0的字符串则为 ‘.’,为当前这个目录。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"><span class="keyword">const</span> indexPath = path.join(<span class="string">'/app'</span>, <span class="string">'/home'</span>, <span class="string">'tab'</span>, <span class="string">'..'</span>)</div><div class="line"><span class="built_in">console</span>.log(indexPath) <span class="comment">// /app/home</span></div></pre></td></tr></table></figure></p>
+<h1 id="path-resolve"><a href="#path-resolve" class="headerlink" title="path.resolve()"></a>path.resolve()</h1><p>会解析一个路径或者路径片段为一个绝对路径，在给定的路径中从右向左进行处理。长度为0的path会被忽略。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"><span class="keyword">const</span> indexPath = path.resolve(<span class="string">'/app'</span>, <span class="string">'/home'</span>, <span class="string">'/A'</span>, <span class="string">'/B'</span>, <span class="string">'/C'</span>, <span class="string">'../D'</span>)</div><div class="line">其实就是调用终端的cd 和 pwd命令</div><div class="line">cd app</div><div class="line">cd home</div><div class="line">cd A</div><div class="line">cd B</div><div class="line">cd C</div><div class="line">cd ../D</div><div class="line">pwd  输出: app/home/A/B/D</div></pre></td></tr></table></figure></p>
 <h1 id="dirname-和-filename"><a href="#dirname-和-filename" class="headerlink" title="dirname 和 filename"></a><strong>dirname 和 </strong>filename</h1><p>新建一个项目node_demo –&gt; 新建文件夹home –&gt; 新建文件 test.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(__dirname) <span class="comment">// node_demo/home</span></div><div class="line"><span class="built_in">console</span>.log(__filename) <span class="comment">// node_demo/home/test.js</span></div></pre></td></tr></table></figure></p>
 
     
