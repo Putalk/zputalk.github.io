@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES6常用特性 | pu</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="ES6,ES2015," />
+  
+
+  <meta name="description" content="let const和块级作用域const定义常量 let定义变量 let会使该变量处于一个块级作用域。123456const str = &apos;Hello World&apos;;      str = &apos;Hello&apos;; // 报错let str = &apos;Hello World&apos;;str = &apos;Hello&apos;;console.log(str); // Hello 箭头函数箭头函数对上下文的绑定是强制性的，无法通过">
+<meta name="keywords" content="ES6,ES2015">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6常用特性">
+<meta property="og:url" content="http://zputalk.com/2017/10/25/ES6常用特性/index.html">
+<meta property="og:site_name" content="pu">
+<meta property="og:description" content="let const和块级作用域const定义常量 let定义变量 let会使该变量处于一个块级作用域。123456const str = &apos;Hello World&apos;;      str = &apos;Hello&apos;; // 报错let str = &apos;Hello World&apos;;str = &apos;Hello&apos;;console.log(str); // Hello 箭头函数箭头函数对上下文的绑定是强制性的，无法通过">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-10-25T12:55:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6常用特性">
+<meta name="twitter:description" content="let const和块级作用域const定义常量 let定义变量 let会使该变量处于一个块级作用域。123456const str = &apos;Hello World&apos;;      str = &apos;Hello&apos;; // 报错let str = &apos;Hello World&apos;;str = &apos;Hello&apos;;console.log(str); // Hello 箭头函数箭头函数对上下文的绑定是强制性的，无法通过">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#let-const和块级作用域"><span class="toc-text">let const和块级作用域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#箭头函数"><span class="toc-text">箭头函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模板字符串"><span class="toc-text">模板字符串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对象字面量扩展法"><span class="toc-text">对象字面量扩展法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#表达式结构"><span class="toc-text">表达式结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#函数参数表达、传参"><span class="toc-text">函数参数表达、传参</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Map"><span class="toc-text">Map</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Set"><span class="toc-text">Set</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#class"><span class="toc-text">class</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#生成器"><span class="toc-text">生成器</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-ES6常用特性" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">ES6常用特性</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.10.25</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>pu</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/ES6/">ES6</a>
+  </span>
+
+
+
+      
+
+      
+
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="let-const和块级作用域"><a href="#let-const和块级作用域" class="headerlink" title="let const和块级作用域"></a>let const和块级作用域</h1><p>const定义常量 let定义变量 let会使该变量处于一个块级作用域。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> str = <span class="string">'Hello World'</span>;</div><div class="line">      str = <span class="string">'Hello'</span>; <span class="comment">// 报错</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> str = <span class="string">'Hello World'</span>;</div><div class="line">str = <span class="string">'Hello'</span>;</div><div class="line"><span class="built_in">console</span>.log(str); <span class="comment">// Hello</span></div></pre></td></tr></table></figure></p>
+<h1 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h1><p>箭头函数对上下文的绑定是强制性的，无法通过 apply 或 call 方法改变其上下文。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">foo =&gt; foo + <span class="string">'Hello'</span>;</div><div class="line"></div><div class="line">(bar, foo) =&gt; foo + bar;</div><div class="line"></div><div class="line">foo =&gt; &#123;</div><div class="line">    <span class="keyword">return</span> foo + <span class="string">'Hello'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">(bar, foo) =&gt; &#123;</div><div class="line">    <span class="keyword">return</span> bar + foo</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h1><p>支持赋值变量 支持换行<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> H = <span class="string">'Hello'</span>;</div><div class="line"><span class="keyword">const</span> W = <span class="string">'World'</span>;</div><div class="line"><span class="keyword">const</span> str = <span class="string">`javascript</span></div><div class="line"><span class="string">             <span class="subst">$&#123;H&#125;</span></span></div><div class="line"><span class="string">             <span class="subst">$&#123;W&#125;</span></span></div><div class="line"><span class="string">             `</span>;</div><div class="line"><span class="built_in">console</span>.log(str) <span class="comment">// javascript Hello World</span></div></pre></td></tr></table></figure></p>
+<h1 id="对象字面量扩展法"><a href="#对象字面量扩展法" class="headerlink" title="对象字面量扩展法"></a>对象字面量扩展法</h1><p>省略 function<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">bar () &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'bar'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>同名方法属性省略方法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span>&#123;</div><div class="line">    bar</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="表达式结构"><a href="#表达式结构" class="headerlink" title="表达式结构"></a>表达式结构</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">      bar: bar,</div><div class="line">      foo: foo</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">let</span> &#123;bar, foo&#125; = bar();</div><div class="line"></div><div class="line"><span class="keyword">let</span> [x,,y] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</div><div class="line"><span class="built_in">console</span>.log(x); <span class="comment">// 1</span></div><div class="line"><span class="built_in">console</span>.log(y); <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<h1 id="函数参数表达、传参"><a href="#函数参数表达、传参" class="headerlink" title="函数参数表达、传参"></a>函数参数表达、传参</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params">x, y = <span class="number">1</span>, z = <span class="number">2</span></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(x);</div><div class="line">  <span class="built_in">console</span>.log(y);</div><div class="line">  <span class="built_in">console</span>.log(z);</div><div class="line">&#125;</div><div class="line">bar(<span class="string">'a'</span>, <span class="string">'b'</span>); <span class="comment">// a b 2</span></div></pre></td></tr></table></figure>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p>是一组键值对的结构<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr = [[<span class="string">'a'</span>, <span class="number">1</span>], [<span class="string">'b'</span>, <span class="number">2</span>], [<span class="string">'c'</span>, <span class="number">3</span>]];</div><div class="line"><span class="keyword">let</span> m = <span class="keyword">new</span> map(arr);</div><div class="line">m.get(<span class="string">'a'</span>); <span class="comment">//获取 1;</span></div><div class="line">m.set(<span class="string">'d'</span>, <span class="number">4</span>); <span class="comment">// 赋值</span></div><div class="line">m.has(<span class="string">'b'</span>); <span class="comment">// true</span></div></pre></td></tr></table></figure></p>
+<h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><p>set也为key的集合，key不允许重复<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">1</span>];</div><div class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> set (arr);  <span class="comment">// [1,2,3,4]</span></div><div class="line">s.add(<span class="number">5</span>);               <span class="comment">// [1,2,3,4,5]</span></div><div class="line">s.delete(<span class="number">1</span>)             <span class="comment">// [2,3,4,5]</span></div></pre></td></tr></table></figure></p>
+<h1 id="class"><a href="#class" class="headerlink" title="class"></a>class</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span> (name, age, gender) &#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">        <span class="keyword">this</span>.age = age;</div><div class="line">        <span class="keyword">this</span>.gender = gender;</div><div class="line">    &#125;</div><div class="line">    say () &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Man</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span> (name, age, 'man') &#123;</div><div class="line">        <span class="keyword">super</span>(name, age, <span class="string">'man'</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> me = <span class="keyword">new</span> Man(<span class="string">'xiaoming'</span>, <span class="number">22</span>);</div><div class="line"><span class="built_in">console</span>.log(me.say());</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Man</span> </span>&#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line"></div><div class="line">  <span class="keyword">static</span> isMan(obj) &#123;</div><div class="line">    <span class="keyword">return</span> obj <span class="keyword">instanceof</span> Man</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> me = <span class="keyword">new</span> Man()</div><div class="line"><span class="built_in">console</span>.log(Man.isMan(me)) <span class="comment">//=&gt; true</span></div></pre></td></tr></table></figure>
+<h1 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h1>
+    
+  </div>
+</article>
+
+
+   
+
+   <!-- 
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/10/24/webpack的基本配置/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+ -->
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+
+
+
+    
+
+    
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
