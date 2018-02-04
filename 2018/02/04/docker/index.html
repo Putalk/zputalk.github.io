@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Docker 制作前端镜像以及部署 | pu</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Docker," />
+  
+
+  <meta name="description" content="以下都是基于mac环境，window环境自行百度。 mac 安装 Docker 下载通过这个链接下载 https://download.docker.com/mac/stable/Docker.dmg 安装双击下载的dmg文件，将docker拖拽到Application里面 启动docker docker 常用命令123456789101112131415161718192021222324252">
+<meta name="keywords" content="Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 制作前端镜像以及部署">
+<meta property="og:url" content="http://yoursite.com/2018/02/04/docker/index.html">
+<meta property="og:site_name" content="pu">
+<meta property="og:description" content="以下都是基于mac环境，window环境自行百度。 mac 安装 Docker 下载通过这个链接下载 https://download.docker.com/mac/stable/Docker.dmg 安装双击下载的dmg文件，将docker拖拽到Application里面 启动docker docker 常用命令123456789101112131415161718192021222324252">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload.cc/i/fOicnd.jpg">
+<meta property="og:image" content="https://upload.cc/i/ZV9itI.jpg">
+<meta property="og:image" content="https://upload.cc/i/yhopwK.jpg">
+<meta property="og:image" content="https://upload.cc/i/AMgw9y.jpg">
+<meta property="og:image" content="https://upload.cc/i/z2yPHX.jpg">
+<meta property="og:image" content="https://upload.cc/i/O81JHX.jpg">
+<meta property="og:image" content="https://upload.cc/i/TR1xEw.jpg">
+<meta property="og:image" content="https://upload.cc/i/OwYGU9.jpg">
+<meta property="og:image" content="https://upload.cc/i/i5GtZ3.jpg">
+<meta property="og:updated_time" content="2018-02-04T09:03:52.359Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker 制作前端镜像以及部署">
+<meta name="twitter:description" content="以下都是基于mac环境，window环境自行百度。 mac 安装 Docker 下载通过这个链接下载 https://download.docker.com/mac/stable/Docker.dmg 安装双击下载的dmg文件，将docker拖拽到Application里面 启动docker docker 常用命令123456789101112131415161718192021222324252">
+<meta name="twitter:image" content="https://upload.cc/i/fOicnd.jpg">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#mac-安装-Docker"><span class="toc-text">mac 安装 Docker</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#利用daoCloud-构建镜像部署"><span class="toc-text">利用daoCloud 构建镜像部署</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#本地docker构建"><span class="toc-text">本地docker构建</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-docker" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Docker 制作前端镜像以及部署</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.02.04</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>pu</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>以下都是基于mac环境，window环境自行百度。</p>
+<h1 id="mac-安装-Docker"><a href="#mac-安装-Docker" class="headerlink" title="mac 安装 Docker"></a>mac 安装 Docker</h1><ol>
+<li>下载<br>通过这个链接下载 <a href="https://download.docker.com/mac/stable/Docker.dmg" target="_blank" rel="external">https://download.docker.com/mac/stable/Docker.dmg</a></li>
+<li>安装<br>双击下载的dmg文件，将docker拖拽到Application里面<br><img src="https://upload.cc/i/fOicnd.jpg" alt=""></li>
+<li>启动docker<br><img src="https://upload.cc/i/ZV9itI.jpg" alt=""></li>
+<li>docker 常用命令<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"># 查看docker版本</div><div class="line">docker version</div><div class="line"># 显示docker系统的信息</div><div class="line">docker info</div><div class="line"># 日志信息</div><div class="line">docker logs</div><div class="line"># 故障检查</div><div class="line">service  docker  status</div><div class="line"># 启动关闭docker</div><div class="line">sudo service docker start|stop</div><div class="line"># 查看docker容器</div><div class="line">docker ps</div><div class="line"># 删除容器</div><div class="line">docker rm [容器id]</div><div class="line"># 删除镜像</div><div class="line">docker rmi [镜像id]</div><div class="line"># 启动容器</div><div class="line">docker start [容器id]</div><div class="line"># 停止容器</div><div class="line">docker stop [容器id]</div><div class="line"># 运行一个新的容器，并命名、端口映射、文件夹映射</div><div class="line">docker run --name redmine -p <span class="number">9003</span>:<span class="number">80</span> -p <span class="number">9023</span>:<span class="number">22</span> -d -v /<span class="keyword">var</span>/redmine/files:<span class="regexp">/redmine/</span>files -v /<span class="keyword">var</span>/redmine/mysql:<span class="regexp">/var/</span>lib/mysql sameersbn/redmine</div><div class="line"># 搜索镜像</div><div class="line">docker search</div><div class="line"># 拉取镜像</div><div class="line">docker pull</div><div class="line"># 推送镜像</div><div class="line">docker push</div><div class="line"># 构建镜像</div><div class="line">docker build -t &lt;镜像名字&gt; &lt;dockerFiler路径&gt;</div><div class="line">docker build -t xx/gitlab .</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="利用daoCloud-构建镜像部署"><a href="#利用daoCloud-构建镜像部署" class="headerlink" title="利用daoCloud 构建镜像部署"></a>利用daoCloud 构建镜像部署</h1><ol>
+<li>利用vue-cli 创建一个vue项目<br>可以自行搜索vue官方文档，也可以自己创建一个项目。</li>
+<li>在项目中创建一个Dockerfile 文件<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"># 使用 node:6.10.3</div><div class="line">FROM node:<span class="number">6.10</span><span class="number">.3</span>-slim</div><div class="line"># 安装nginx</div><div class="line">RUN apt-get update \</div><div class="line">    &amp;&amp; apt-get install -y nginx</div><div class="line"># 制定工作目录</div><div class="line">WORKDIR /app</div><div class="line"># 将当前目录下的所有文件拷贝到工作目录</div><div class="line">COPY ./app</div><div class="line"># 声明运行时容器提供的端口</div><div class="line">EXPOSE <span class="number">80</span></div><div class="line"># 安装依赖</div><div class="line"># 打包app</div><div class="line"># 将打包的文件拷贝到nginx下的文件下</div><div class="line">RUN npm install</div><div class="line">    &amp;&amp; npm run build</div><div class="line">    &amp;&amp; cp -r dist/\*  <span class="regexp">/var/</span>www/html</div><div class="line">    &amp;&amp; rm -rf /app  </div><div class="line"># 启动nginx</div><div class="line">CMD [<span class="string">"nginx"</span>,<span class="string">"-g"</span>,<span class="string">"daemon off;"</span>]</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>3.配置DaoCloud<br><br>(1).注册DaoCloud,并配置远程代码库<br><img src="https://upload.cc/i/yhopwK.jpg" alt=""><br>(2) 创建项目 并build镜像<br><img src="https://upload.cc/i/AMgw9y.jpg" alt=""><br>(3) 然后部署到主机上，DaoCloud 提供两个小时的测试机子<br><img src="https://upload.cc/i/z2yPHX.jpg" alt=""><br><img src="https://upload.cc/i/O81JHX.jpg" alt=""><br><img src="https://upload.cc/i/TR1xEw.jpg" alt=""><br><img src="https://upload.cc/i/OwYGU9.jpg" alt=""></p>
+<ol>
+<li>部署成功后，外部访问<br><img src="https://upload.cc/i/i5GtZ3.jpg" alt=""><h1 id="本地docker构建"><a href="#本地docker构建" class="headerlink" title="本地docker构建"></a>本地docker构建</h1><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># 拉取nginx镜像</div><div class="line">docker pull hub.c<span class="number">.163</span>.com/library/nginx:latest</div><div class="line">#启动nginx容器</div><div class="line">docker run -p <span class="number">8080</span>:<span class="number">80</span> --name nginx_web -it hub.c<span class="number">.163</span>.com/library/nginx /bin/bash</div><div class="line"># 修改80端口指定的入口文件</div><div class="line"># 启动nginx</div><div class="line">nginx</div><div class="line"># 进入项目中有dockerfile的文件运行</div><div class="line">docker build --rm -t vue-hello .</div><div class="line"># 检查镜像是否构建成功</div><div class="line">docker images</div><div class="line"># 运行镜像</div><div class="line">docker run -p <span class="number">8080</span>:<span class="number">80</span> vue-hello</div><div class="line"># 访问应用</div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+    
+  </div>
+</article>
+
+
+   
+
+   <!-- 
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/10/24/webpack的基本配置/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+ -->
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+
+
+
+    
+
+    
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
