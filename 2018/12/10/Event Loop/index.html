@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Event loop | pu</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="JavaScript," />
+  
+
+  <meta name="description" content="Event Loop 是什么？1Event Loop 是js的执行机制 为啥需要 Event Loop1众所周知 js是一门单线程语言，js中的语言都是按照代码顺序执行的，也就是需要后一个任务必须要等待前一个任务执行完毕才能执行,比如我网页中有个列表请求数据，由于种种原因数据迟迟未返回。如果按照咱们刚刚说的执行顺序，那就是等待数据加载完才能执行之后的任务。所以为了避免堵塞，就有了">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Event loop">
+<meta property="og:url" content="‘http://www.zputalk.top’/2018/12/10/Event Loop/index.html">
+<meta property="og:site_name" content="pu">
+<meta property="og:description" content="Event Loop 是什么？1Event Loop 是js的执行机制 为啥需要 Event Loop1众所周知 js是一门单线程语言，js中的语言都是按照代码顺序执行的，也就是需要后一个任务必须要等待前一个任务执行完毕才能执行,比如我网页中有个列表请求数据，由于种种原因数据迟迟未返回。如果按照咱们刚刚说的执行顺序，那就是等待数据加载完才能执行之后的任务。所以为了避免堵塞，就有了">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fxp0r50bz4j30gp0endg6.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fxpcqw7mz5j31200lmwgh.jpg">
+<meta property="og:updated_time" content="2019-02-03T03:21:52.708Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Event loop">
+<meta name="twitter:description" content="Event Loop 是什么？1Event Loop 是js的执行机制 为啥需要 Event Loop1众所周知 js是一门单线程语言，js中的语言都是按照代码顺序执行的，也就是需要后一个任务必须要等待前一个任务执行完毕才能执行,比如我网页中有个列表请求数据，由于种种原因数据迟迟未返回。如果按照咱们刚刚说的执行顺序，那就是等待数据加载完才能执行之后的任务。所以为了避免堵塞，就有了">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fxp0r50bz4j30gp0endg6.jpg">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Event-Loop-是什么？"><span class="toc-text">Event Loop 是什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为啥需要-Event-Loop"><span class="toc-text">为啥需要 Event Loop</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#macrotask、microtask"><span class="toc-text">macrotask、microtask</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器环境的-Event-Loop"><span class="toc-text">浏览器环境的 Event Loop</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Node-环境的-Event-Loop"><span class="toc-text">Node 环境的 Event Loop</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Event Loop" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Event loop</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.12.10</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>pu</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </span>
+
+
+
+      
+
+      
+
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="Event-Loop-是什么？"><a href="#Event-Loop-是什么？" class="headerlink" title="Event Loop 是什么？"></a>Event Loop 是什么？</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Event Loop 是js的执行机制</div></pre></td></tr></table></figure>
+<h1 id="为啥需要-Event-Loop"><a href="#为啥需要-Event-Loop" class="headerlink" title="为啥需要 Event Loop"></a>为啥需要 Event Loop</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">众所周知 js是一门单线程语言，js中的语言都是按照代码顺序执行的，也就是需要后一个任务必须要等待前一个任务执行完毕才能执行,比如我网页中有个列表请求数据，由于种种原因数据迟迟未返回。如果按照咱们刚刚说的执行顺序，那就是等待数据加载完才能执行之后的任务。所以为了避免堵塞，就有了Event Loop</div></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fxp0r50bz4j30gp0endg6.jpg" alt="Alt Text"></p>
+<ul>
+<li>如图当 js 主线程运行时就会产生堆（heap）和栈（stack）。</li>
+<li>js 在执行的过程中会产生执行环境,当  遇到异步事件时就会把  它放到任务队列中（如执行栈中的去调用一些 webApi，click 事件等被放在任务队列中）。</li>
+<li>当执行栈中执行完毕后，主线程就会去读取任务队列把第一个放到执行栈执行（图中执行栈执行完  会把任务队列中  的 click 事件的回调放到执行栈  执行）</li>
+<li>当执行栈执行时遇到异步，又回放到任务队列中</li>
+<li>执行栈清空后，会去检查任务队列中是否有需要执行的，如果有就拿过来执行， 会一直重复这个  动作，称为 Event Loop</li>
+</ul>
+<h1 id="macrotask、microtask"><a href="#macrotask、microtask" class="headerlink" title="macrotask、microtask"></a>macrotask、microtask</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">这两者是对异步任务的一个划分，不同的异步任务会y依次进入自身对应的队列中,等待Event Loop 把他们放入执行栈执行</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">macrotask(宏任务): setTimeout、setInterval、setImmediate、I/O、UI交互事</div><div class="line">microtask(微任务): Promise、process.nextTick、MutaionObserver</div></pre></td></tr></table></figure>
+<h1 id="浏览器环境的-Event-Loop"><a href="#浏览器环境的-Event-Loop" class="headerlink" title="浏览器环境的 Event Loop"></a>浏览器环境的 Event Loop</h1><p>来段代码实践下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>)</div><div class="line">&#125;)</div><div class="line"><span class="built_in">console</span>.log(<span class="number">2</span>)</div><div class="line">执行过程：</div><div class="line">根据js从上往下执行，遇到setTimeout 后会先把setTimeout 放到任务队列中,然后继续往下执行遇到log，执行栈执行log输出<span class="number">2</span>，然后这时候去任务队列检测是否有需要执行的发现有setTimeout ,然后放到执行栈执行输出<span class="number">1</span></div></pre></td></tr></table></figure>
+<p>上面的发现太简单了，再来段代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> a = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>)</div><div class="line">  <span class="keyword">const</span> b = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>)</div><div class="line">  &#125;, <span class="number">200</span>)</div><div class="line">  <span class="keyword">const</span> c = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">3</span>)</div><div class="line">  &#125;, <span class="number">100</span>)</div><div class="line">&#125;, <span class="number">1000</span>)</div><div class="line"><span class="keyword">const</span> d = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="number">4</span>)</div><div class="line">  <span class="keyword">const</span> e = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="number">5</span>)</div><div class="line">  &#125;, <span class="number">1</span>)</div><div class="line">&#125;, <span class="number">0</span>)</div><div class="line"><span class="built_in">console</span>.log(<span class="number">6</span>)</div><div class="line"></div><div class="line">执行过程：</div><div class="line">依次往下执行</div><div class="line">遇到a(settimeout) 放入任务队列,然后继续执行,遇到d(setTimeout) 放到macrotask任务队列中，继续执行log输出<span class="number">6</span>，这时候发现执行栈为空，开始去检测任务队列，发现又需要执行的，d 时间为<span class="number">0</span> ，执行输出<span class="number">4</span>，然后遇到e（setTimeout）放进macrotask队列中，然后再去队列中取，遇到e 输出<span class="number">5</span>, 往下遇到a然后输出<span class="number">1</span>, 往下执行遇到b,c 放进macrotask任务队列，执行栈执行为空，然后重复执行输出<span class="number">3</span>，输出<span class="number">2</span></div></pre></td></tr></table></figure>
+<p>setTimeout 玩完后，肯定想到是 setInterval</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">其实两个是差不多的，setInterval会每隔指定的时间将注册的函数放到队列中，如果前面的任务耗时太久，那么同样需要等待</div></pre></td></tr></table></figure>
+<p> 再加个 promise 玩玩</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="number">1</span>)</div><div class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>)</div><div class="line">    <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="number">3</span>)</div><div class="line">        resolve()</div><div class="line">    &#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="number">4</span>)</div><div class="line">    &#125;)</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">5</span>)</div><div class="line">    resolve()</div><div class="line">&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">6</span>)</div><div class="line">&#125;)</div><div class="line"></div><div class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">7</span>)</div><div class="line">    <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="number">8</span>)</div><div class="line">        resolve()</div><div class="line">    &#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="number">9</span>)</div><div class="line">    &#125;)</div><div class="line">&#125;)</div><div class="line">执行过程：</div><div class="line"><span class="number">1.</span>遇到log后输出<span class="number">1</span>,然后遇到setTimeout放到mac任务队列中,继续往下执行,遇到promise然后输出<span class="number">5</span>把then放到mic任务队列中,继续执行遇到setTimeout放到mac任务队列中</div><div class="line"><span class="number">2.</span>这时候取微任务中promise的then执行输出<span class="number">6</span></div><div class="line"><span class="number">3.</span>然后执行宏任务取setTimout输出<span class="number">2</span>,遇到promise执行输出<span class="number">3</span>,然后把then放进mic任务队列。</div><div class="line"><span class="number">4.</span>取mic中promise的then输出<span class="number">4</span></div><div class="line"><span class="number">5.</span>取mac中setTimeout 输出<span class="number">7</span>,遇到promise执行输出<span class="number">8</span>，然后把then放进mic任务队列。</div><div class="line"><span class="number">6.</span>去mic任务队列中取第一个promise中的then执行输出<span class="number">8</span></div><div class="line"><span class="number">7.</span>然后mic取第一个promise的then输出<span class="number">9</span></div><div class="line">总上就是执行完一次宏任务或者宏任务队列为空去清空下微任务队列，算一次循环</div></pre></td></tr></table></figure>
+<h1 id="Node-环境的-Event-Loop"><a href="#Node-环境的-Event-Loop" class="headerlink" title="Node 环境的 Event Loop"></a>Node 环境的 Event Loop</h1><p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fxpcqw7mz5j31200lmwgh.jpg" alt="Alt Text"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Node的Event Loop分阶段，阶段有先后，依次是</div><div class="line">expired timers and intervals，即到期的setTimeout/setInterval</div><div class="line">I/O events，包含文件，网络等等</div><div class="line">immediates，通过setImmediate注册的函数</div><div class="line">close handlers，close事件的回调，比如TCP连接断开</div><div class="line"></div><div class="line">同步任务及每个阶段之后都会清空microtask队列</div><div class="line">优先清空next tick queue，即通过process.nextTick注册的函数, 全部清空后然后才会去清空other queue</div><div class="line">再清空other queue，常见的如Promise, 一直到任务队列全部清空后再去进入下一个事件循环</div></pre></td></tr></table></figure>
+<p>发现还有 process.nextTick  再来搞下直接上代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>)</div><div class="line">    <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="number">2</span>)</div><div class="line">        resolve()</div><div class="line">    &#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="number">3</span>)</div><div class="line">    &#125;)</div><div class="line">    process.nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="number">4</span>)</div><div class="line">    &#125;)</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">5</span>)</div><div class="line">    resolve()</div><div class="line">&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">6</span>)</div><div class="line">&#125;)</div><div class="line"><span class="built_in">console</span>.log(<span class="number">7</span>)</div><div class="line">process.nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">8</span>)</div><div class="line">&#125;)</div><div class="line">执行过程：</div><div class="line">同步执行输出：<span class="number">5</span>、<span class="number">7</span></div><div class="line">优先清除next tick queue 即执行process.nextTick 输出 <span class="number">8</span></div><div class="line">再去清除other queue 即输出 <span class="number">6</span></div><div class="line">然后执行setTimeout 输出 <span class="number">1</span>、<span class="number">2</span></div><div class="line">再去清除next tick queue 输出 <span class="number">4</span></div><div class="line">清除other queue 输出 <span class="number">3</span></div></pre></td></tr></table></figure>
+<p>setImmediate</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">setImmediate(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>)</div><div class="line">&#125;)</div><div class="line">执行过程：</div><div class="line">两个执行时无法确定两者之间的顺序，如果执行setTimout, 到poll的这个执行节点，会重新返回查找timers这个节点上是否有需要执行的，然后发现为空，再进入下一个事件循环,执行settmmediate</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span>  fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</div><div class="line"></div><div class="line">fs.open(<span class="string">'./style.css'</span>, <span class="string">'r'</span>, (err, fd) =&gt; &#123;</div><div class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="number">1</span>)</div><div class="line">    &#125;)</div><div class="line">    setImmediate(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="number">2</span>)</div><div class="line">    &#125;)</div><div class="line">&#125;);</div><div class="line"><span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">3</span>)</div><div class="line">    <span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="number">4</span>)</div><div class="line">    &#125;)</div><div class="line">    process.nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="number">5</span>)</div><div class="line">    &#125;)</div><div class="line">&#125;)</div><div class="line">process.nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">6</span>)</div><div class="line">&#125;)</div><div class="line"></div><div class="line">执行过程：</div><div class="line"><span class="number">1.</span> fs 放入I/O 中，继续执行，</div><div class="line"><span class="number">2.</span> 循环结束后清理next tick queue 输出 <span class="number">6</span></div><div class="line"><span class="number">3.</span> 然后清理other queue 输出 <span class="number">3</span> 进入后会把当前队列清空完毕，输出 <span class="number">4</span></div><div class="line"><span class="number">4.</span> 然后进入next tick queue 清空当前队列 输出 <span class="number">5</span>，进入下一个事件循环</div><div class="line"><span class="number">5.</span> 输出 <span class="number">2</span> 然后输出 <span class="number">1</span></div></pre></td></tr></table></figure>
+<p>总结：<br>浏览器中是没执行完 mac（宏任务）一次，去检测下是否有微任务<br>node 是执行完所有的 mac（宏任务），才去检测下是否有微任务</p>
+
+    
+  </div>
+</article>
+
+
+   
+
+   <!-- 
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/07/12/vue中优化/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2019/02/03/python 变量和基本数据类型/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+ -->
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+
+
+
+    
+
+    
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
