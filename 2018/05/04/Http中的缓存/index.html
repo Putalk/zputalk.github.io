@@ -15,18 +15,18 @@
     <meta name="keywords" content="Http," />
   
 
-  <meta name="description" content="http 缓存概念123456789浏览器缓存主要是htpp协议定义的缓存机制缓存方式一般分为两种：强制缓存和协商缓存强制缓存优先级高于协商缓存 ```    ```javascript浏览器请求资源时会根据http的头信息expire和cache-control,判断是否是强制缓存如果为强制缓存直接从浏览器缓存中获取资源。判断不是则发送请求，根据last-modified或Etag，判断是否为协">
+  <meta name="description" content="http 缓存概念123浏览器缓存主要是htpp协议定义的缓存机制缓存方式一般分为两种：强制缓存和协商缓存强制缓存优先级高于协商缓存 1234浏览器请求资源时会根据http的头信息expire和cache-control,判断是否是强制缓存如果为强制缓存直接从浏览器缓存中获取资源。判断不是则发送请求，根据last-modified或Etag，判断是否为协商缓存，如果有从缓存中获取资源。没有则在服务">
 <meta name="keywords" content="Http">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Http中的缓存">
 <meta property="og:url" content="‘http://www.zputalk.top’/2018/05/04/Http中的缓存/index.html">
 <meta property="og:site_name" content="pu">
-<meta property="og:description" content="http 缓存概念123456789浏览器缓存主要是htpp协议定义的缓存机制缓存方式一般分为两种：强制缓存和协商缓存强制缓存优先级高于协商缓存 ```    ```javascript浏览器请求资源时会根据http的头信息expire和cache-control,判断是否是强制缓存如果为强制缓存直接从浏览器缓存中获取资源。判断不是则发送请求，根据last-modified或Etag，判断是否为协">
+<meta property="og:description" content="http 缓存概念123浏览器缓存主要是htpp协议定义的缓存机制缓存方式一般分为两种：强制缓存和协商缓存强制缓存优先级高于协商缓存 1234浏览器请求资源时会根据http的头信息expire和cache-control,判断是否是强制缓存如果为强制缓存直接从浏览器缓存中获取资源。判断不是则发送请求，根据last-modified或Etag，判断是否为协商缓存，如果有从缓存中获取资源。没有则在服务">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-03T02:42:01.765Z">
+<meta property="og:updated_time" content="2019-02-03T02:43:08.964Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Http中的缓存">
-<meta name="twitter:description" content="http 缓存概念123456789浏览器缓存主要是htpp协议定义的缓存机制缓存方式一般分为两种：强制缓存和协商缓存强制缓存优先级高于协商缓存 ```    ```javascript浏览器请求资源时会根据http的头信息expire和cache-control,判断是否是强制缓存如果为强制缓存直接从浏览器缓存中获取资源。判断不是则发送请求，根据last-modified或Etag，判断是否为协">
+<meta name="twitter:description" content="http 缓存概念123浏览器缓存主要是htpp协议定义的缓存机制缓存方式一般分为两种：强制缓存和协商缓存强制缓存优先级高于协商缓存 1234浏览器请求资源时会根据http的头信息expire和cache-control,判断是否是强制缓存如果为强制缓存直接从浏览器缓存中获取资源。判断不是则发送请求，根据last-modified或Etag，判断是否为协商缓存，如果有从缓存中获取资源。没有则在服务">
 
   
 
@@ -201,7 +201,8 @@
 
   <div class="article-content">
     
-      <h1 id="http-缓存概念"><a href="#http-缓存概念" class="headerlink" title="http 缓存概念"></a>http 缓存概念</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">浏览器缓存主要是htpp协议定义的缓存机制</div><div class="line">缓存方式一般分为两种：强制缓存和协商缓存</div><div class="line">强制缓存优先级高于协商缓存 </div><div class="line"><span class="string">``</span><span class="string">`    </span></div><div class="line"><span class="string">`</span><span class="string">``</span>javascript</div><div class="line">浏览器请求资源时会根据http的头信息expire和cache-control,判断是否是强制缓存</div><div class="line">如果为强制缓存直接从浏览器缓存中获取资源。</div><div class="line">判断不是则发送请求，根据last-modified或Etag，判断是否为协商缓存，如果有从缓存中获取资源。</div><div class="line">没有则在服务器端获取资源</div></pre></td></tr></table></figure>
+      <h1 id="http-缓存概念"><a href="#http-缓存概念" class="headerlink" title="http 缓存概念"></a>http 缓存概念</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">浏览器缓存主要是htpp协议定义的缓存机制</div><div class="line">缓存方式一般分为两种：强制缓存和协商缓存</div><div class="line">强制缓存优先级高于协商缓存</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">浏览器请求资源时会根据http的头信息expire和cache-control,判断是否是强制缓存</div><div class="line">如果为强制缓存直接从浏览器缓存中获取资源。</div><div class="line">判断不是则发送请求，根据last-modified或Etag，判断是否为协商缓存，如果有从缓存中获取资源。</div><div class="line">没有则在服务器端获取资源</div></pre></td></tr></table></figure>
 <h1 id="强制缓存（expires-cache-control）无须验证的缓存策略"><a href="#强制缓存（expires-cache-control）无须验证的缓存策略" class="headerlink" title="强制缓存（expires/cache-control）无须验证的缓存策略"></a>强制缓存（expires/cache-control）无须验证的缓存策略</h1><h2 id="expires"><a href="#expires" class="headerlink" title="expires"></a>expires</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">指的是缓存资源的过期时间（如果由于使用具体的时间，</div><div class="line">转化格式不正确就会造成缓存生命周期出错）,为http1<span class="number">.0</span>中的标准</div><div class="line">更倾向于http1<span class="number">.1</span>中的cache-control,两个同时存在时cache-control优先级更高</div></pre></td></tr></table></figure>
 <h2 id="cache-control"><a href="#cache-control" class="headerlink" title="cache-control"></a>cache-control</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cache-control 是http1<span class="number">.1</span>中的标准，cache-control 有多个字段组成</div><div class="line">max-age 设置时间长度</div><div class="line">s-maxage 设置时间长度，优先级大于max-age</div><div class="line">no-cache 每次请求资源时都向服务器端进行验证</div><div class="line">no-store 禁止缓存，每次都请求服务器端</div><div class="line">public 指的响应可以被任何对象缓存</div><div class="line">private 指的是响应只能有某个对象进行缓存</div></pre></td></tr></table></figure>
 <h1 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">缓存的时间到后向服务器端发送请求，如果服务器端资源未进行任何改变，没必要重新请求一下资源</div><div class="line">浏览器第一次请求资源时，会将数据和响应头存储起来，再次请求时会带上缓存的信息，和服务器进行</div><div class="line">协商，判断资源没有发生改变，会返回一个<span class="number">304</span>，获取新的过期时间，然后浏览器请求缓存的资源，然后状态码 转为<span class="number">200</span></div></pre></td></tr></table></figure>
