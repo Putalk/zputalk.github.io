@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>异步编程 | pu</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="JavaScript," />
+  
+
+  <meta name="description" content="异步编程1234回调函数事件监听发布、订阅模式Promise对象 Generator函数123异步的处理方式之一&quot;协程&quot;，多个线程互相协作，完成异步任务Generator函数可以交出函数的执行权。A程序执行一半时，暂停下然后执行B程序，B程序执行完再执行A程序 1234567891011Generator 函数中有两个语法 yield 和 nextfunction * add (x) &amp;#123;">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="异步编程">
+<meta property="og:url" content="‘http://www.zputalk.top’/2018/05/01/异步编程/index.html">
+<meta property="og:site_name" content="pu">
+<meta property="og:description" content="异步编程1234回调函数事件监听发布、订阅模式Promise对象 Generator函数123异步的处理方式之一&quot;协程&quot;，多个线程互相协作，完成异步任务Generator函数可以交出函数的执行权。A程序执行一半时，暂停下然后执行B程序，B程序执行完再执行A程序 1234567891011Generator 函数中有两个语法 yield 和 nextfunction * add (x) &amp;#123;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-03T02:58:24.977Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="异步编程">
+<meta name="twitter:description" content="异步编程1234回调函数事件监听发布、订阅模式Promise对象 Generator函数123异步的处理方式之一&quot;协程&quot;，多个线程互相协作，完成异步任务Generator函数可以交出函数的执行权。A程序执行一半时，暂停下然后执行B程序，B程序执行完再执行A程序 1234567891011Generator 函数中有两个语法 yield 和 nextfunction * add (x) &amp;#123;">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#异步编程"><span class="toc-text">异步编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Generator函数"><span class="toc-text">Generator函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异步函数async和await"><span class="toc-text">异步函数async和await</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-异步编程" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">异步编程</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.05.01</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>pu</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </span>
+
+
+
+      
+
+      
+
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="异步编程"><a href="#异步编程" class="headerlink" title="异步编程"></a>异步编程</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">回调函数</div><div class="line">事件监听</div><div class="line">发布、订阅模式</div><div class="line"><span class="built_in">Promise</span>对象</div></pre></td></tr></table></figure>
+<h2 id="Generator函数"><a href="#Generator函数" class="headerlink" title="Generator函数"></a>Generator函数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">异步的处理方式之一<span class="string">"协程"</span>，多个线程互相协作，完成异步任务</div><div class="line">Generator函数可以交出函数的执行权。</div><div class="line">A程序执行一半时，暂停下然后执行B程序，B程序执行完再执行A程序</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Generator 函数中有两个语法 <span class="keyword">yield</span> 和 next</div><div class="line"><span class="function"><span class="keyword">function</span> * <span class="title">add</span> (<span class="params">x</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> y = <span class="keyword">yield</span> x + <span class="number">2</span>;</div><div class="line">  <span class="keyword">return</span> y</div><div class="line">&#125;</div><div class="line"><span class="keyword">let</span> f = add(<span class="number">1</span>)</div><div class="line"><span class="comment">// 每次调用netx(),会返回一个对象&#123;value: value: done: Boolean&#125;</span></div><div class="line"><span class="comment">// value代表返回的这个阶段的值，done代表是否已经执行完毕</span></div><div class="line">f.next() <span class="comment">// 输出3</span></div><div class="line"><span class="comment">// next中带有参数传入Generator函数后，代表上个阶段异步任务的结果，被函数内的变量接受，直接返回。</span></div><div class="line">f.next(<span class="number">2</span>) <span class="comment">// 输出2</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Generator 里可以抛出错误</div><div class="line"><span class="function"><span class="keyword">function</span> * <span class="title">gen</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">  <span class="keyword">try</span>&#123;</div><div class="line">      <span class="keyword">var</span> y = <span class="keyword">yield</span> x + <span class="number">2</span>;</div><div class="line">      <span class="keyword">return</span> y;</div><div class="line">  &#125;<span class="keyword">catch</span> (e)&#123;</div><div class="line">      <span class="built_in">console</span>.log(e)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">let</span> f = gen(<span class="number">1</span>)</div><div class="line">f.throw(<span class="string">'异常'</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Generator 请求接口</div><div class="line"><span class="function"><span class="keyword">function</span> * <span class="title">gen</span> (<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">let</span> result = <span class="keyword">yield</span> fetch(<span class="string">'https://didi.github.io/cube-ui/#/zh-CN/docs/scroll'</span>)</div><div class="line">	<span class="keyword">return</span> result</div><div class="line">&#125;</div><div class="line"><span class="keyword">let</span> g = gen()</div><div class="line"><span class="keyword">let</span> r = g.next()</div><div class="line">r.value.then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</div><div class="line">	<span class="built_in">console</span>.log(data)</div><div class="line">	<span class="keyword">return</span> data.url</div><div class="line">&#125;).then( <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</div><div class="line">	<span class="built_in">console</span>.log(data)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="异步函数async和await"><a href="#异步函数async和await" class="headerlink" title="异步函数async和await"></a>异步函数async和await</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">async</span>、<span class="keyword">await</span>其实是Generator函数的语法糖</div><div class="line"><span class="keyword">async</span>表示函数里有异步操作</div><div class="line"><span class="keyword">await</span>表示紧跟后面的表达式需要等待结果</div><div class="line">函数前面的<span class="keyword">async</span>的关键字，表明函数内部有异步操作，调用该函数时，会立即返回一个promise对象</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">使用案例</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setTimeOut</span> (<span class="params">ms</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</div><div class="line">      setTimeout(resolve, ms)</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getData</span> (<span class="params">x</span>) </span>&#123;</div><div class="line">  <span class="keyword">await</span> setTimeOut(<span class="number">5000</span>)</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'异步执行完输出'</span>)</div><div class="line">&#125;</div><div class="line"><span class="comment">// 有时候await后面的函数有可能返回的reject，所以await函数应放在try catch 里面</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setTimeOut</span> (<span class="params">ms</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</div><div class="line">      setTimeout(resolve, ms)</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getData</span> (<span class="params">x</span>) </span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">await</span> setTimeOut(<span class="number">5000</span>)</div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'异步执行完输出'</span>)   </div><div class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">        <span class="keyword">throw</span> (e)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 处理多个线程并发执行</span></div><div class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>]</div><div class="line"><span class="keyword">let</span> p = <span class="built_in">Promise</span>.all(arr.map(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">return</span> item + <span class="number">1</span></div><div class="line">&#125;))</div><div class="line">p.then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(data)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+    
+  </div>
+</article>
+
+
+   
+
+   <!-- 
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/02/28/常用的Array与Object的api/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/05/04/Http中的缓存/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+ -->
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+
+
+
+    
+
+    
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
