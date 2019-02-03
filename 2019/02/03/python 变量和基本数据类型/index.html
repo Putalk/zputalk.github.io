@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>python 变量和基本数据类型 | pu</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="python," />
+  
+
+  <meta name="description" content="1. 变量1.1 变量的命名和使用 123456* 变量名只能包含字母数字和下划线，数字不能作为变量名开头* 变量名不能包含空格，可以使用下划线隔开* 不能用关键字作为变量名* 变量名一般为简短和描述性* 慎用小写字母i和大写字母o 1.2 使用变量时避免命名的错误 2. 字符串2.1 使用方法修改字符串的大小写 首字母大写 title 12name = &amp;apos;jam hello&amp;apos;">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python 变量和基本数据类型">
+<meta property="og:url" content="‘http://www.zputalk.top’/2019/02/03/python 变量和基本数据类型/index.html">
+<meta property="og:site_name" content="pu">
+<meta property="og:description" content="1. 变量1.1 变量的命名和使用 123456* 变量名只能包含字母数字和下划线，数字不能作为变量名开头* 变量名不能包含空格，可以使用下划线隔开* 不能用关键字作为变量名* 变量名一般为简短和描述性* 慎用小写字母i和大写字母o 1.2 使用变量时避免命名的错误 2. 字符串2.1 使用方法修改字符串的大小写 首字母大写 title 12name = &amp;apos;jam hello&amp;apos;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-03T02:06:28.096Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python 变量和基本数据类型">
+<meta name="twitter:description" content="1. 变量1.1 变量的命名和使用 123456* 变量名只能包含字母数字和下划线，数字不能作为变量名开头* 变量名不能包含空格，可以使用下划线隔开* 不能用关键字作为变量名* 变量名一般为简短和描述性* 慎用小写字母i和大写字母o 1.2 使用变量时避免命名的错误 2. 字符串2.1 使用方法修改字符串的大小写 首字母大写 title 12name = &amp;apos;jam hello&amp;apos;">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-变量"><span class="toc-text">1. 变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-字符串"><span class="toc-text">2. 字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-数字"><span class="toc-text">3. 数字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-注释"><span class="toc-text">4. 注释</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-python 变量和基本数据类型" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">python 变量和基本数据类型</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.02.03</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>pu</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </span>
+
+
+
+      
+
+      
+
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h3 id="1-变量"><a href="#1-变量" class="headerlink" title="1. 变量"></a>1. 变量</h3><p>1.1 变量的命名和使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">* 变量名只能包含字母数字和下划线，数字不能作为变量名开头</div><div class="line">* 变量名不能包含空格，可以使用下划线隔开</div><div class="line">* 不能用关键字作为变量名</div><div class="line">* 变量名一般为简短和描述性</div><div class="line">* 慎用小写字母i和大写字母o</div></pre></td></tr></table></figure>
+<p>1.2 使用变量时避免命名的错误</p>
+<h3 id="2-字符串"><a href="#2-字符串" class="headerlink" title="2. 字符串"></a>2. 字符串</h3><p>2.1 使用方法修改字符串的大小写</p>
+<p>首字母大写 title</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">name = &apos;jam hello&apos;</div><div class="line">Jam Hello</div></pre></td></tr></table></figure>
+<p>字母全部转为大写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">name = &apos;jam hello&apos;</div><div class="line">JAM HELLO</div></pre></td></tr></table></figure>
+<p>字母全部转为小写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">name = &apos;JAM HELLO&apos;</div><div class="line">jam hello</div></pre></td></tr></table></figure>
+<p>2.2 合并（拼接）字符串<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">first_name = &apos;z&apos; </div><div class="line">last_name = &apos;lp&apos; </div><div class="line">full_name = first_name + last_name &apos;zlp&apos;</div></pre></td></tr></table></figure></p>
+<p>2.3 使用制表符和换行符来添加空白</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(&apos;\tpython&apos;) // 空白</div><div class="line">print(&apos;\npython&apos;) // 换行</div></pre></td></tr></table></figure>
+<p>2.4 删除空白</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">name = &apos;hello world&apos;</div><div class="line">print(name.rstrip())</div></pre></td></tr></table></figure>
+<p>2.5 使用字符串时避免语法错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">程序中包含非法的 python 代码，就会导致语法错误</div></pre></td></tr></table></figure></p>
+<p>2.6 python2 的 print 语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python &apos;hello world&apos;</div></pre></td></tr></table></figure></p>
+<h3 id="3-数字"><a href="#3-数字" class="headerlink" title="3. 数字"></a>3. 数字</h3><p>3.1 整数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">可对整数进行加(+)减(-)乘()除(/)</div><div class="line">2 + 3</div><div class="line">5</div><div class="line">2 - 1</div><div class="line">1</div><div class="line">3 \* 2</div><div class="line">6</div><div class="line">6 / 2</div><div class="line">3</div></pre></td></tr></table></figure></p>
+<p>3.2 浮点数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">print(0.1 + 0.1)</div><div class="line">0.2</div><div class="line">print(0.2 + 0.2)</div><div class="line">0.4</div><div class="line">print(0.2 + 0.1)</div><div class="line">0.30000000000000004</div><div class="line">print(0.2 * 0.1)</div><div class="line">0.020000000000000004</div></pre></td></tr></table></figure>
+<p>3.3 使用函数 str()避免类型错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">使用str转为字符类型</div><div class="line">age = 23</div><div class="line">print(&apos;hello&apos; + str(age) + &apos;world&apos;)</div></pre></td></tr></table></figure>
+<h3 id="4-注释"><a href="#4-注释" class="headerlink" title="4. 注释"></a>4. 注释</h3><p>4.1 如何书写注释</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">在python中 注释用#标识</div><div class="line"># hello world</div></pre></td></tr></table></figure>
+<p>4.2 该编写什么样的注释<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">编写清晰简洁的注释</div></pre></td></tr></table></figure></p>
+
+    
+  </div>
+</article>
+
+
+   
+
+   <!-- 
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/11/30/Event Loop/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+ -->
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+
+
+
+    
+
+    
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
