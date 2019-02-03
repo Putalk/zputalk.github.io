@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Css Modules | pu</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="css," />
+  
+
+  <meta name="description" content="概念和作用1css Modules 是在css中加入了局部作用域和模块化依赖 vue中的使用基础使用123456789101112&amp;lt;template&amp;gt;    &amp;lt;div class=&amp;quot;app&amp;quot;&amp;gt;        // html 中使用css的名        &amp;lt;div :class=&amp;quot;$style.fontColor&amp;quot;&amp;gt;css">
+<meta name="keywords" content="css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Css Modules">
+<meta property="og:url" content="‘http://www.zputalk.top’/2018/05/17/css Modules/index.html">
+<meta property="og:site_name" content="pu">
+<meta property="og:description" content="概念和作用1css Modules 是在css中加入了局部作用域和模块化依赖 vue中的使用基础使用123456789101112&amp;lt;template&amp;gt;    &amp;lt;div class=&amp;quot;app&amp;quot;&amp;gt;        // html 中使用css的名        &amp;lt;div :class=&amp;quot;$style.fontColor&amp;quot;&amp;gt;css">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-03T03:08:40.179Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Css Modules">
+<meta name="twitter:description" content="概念和作用1css Modules 是在css中加入了局部作用域和模块化依赖 vue中的使用基础使用123456789101112&amp;lt;template&amp;gt;    &amp;lt;div class=&amp;quot;app&amp;quot;&amp;gt;        // html 中使用css的名        &amp;lt;div :class=&amp;quot;$style.fontColor&amp;quot;&amp;gt;css">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概念和作用"><span class="toc-text">概念和作用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#vue中的使用"><span class="toc-text">vue中的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础使用"><span class="toc-text">基础使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定义全局样式"><span class="toc-text">定义全局样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#css属性继承"><span class="toc-text">css属性继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承其他模块的值"><span class="toc-text">继承其他模块的值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用变量"><span class="toc-text">使用变量</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-css Modules" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Css Modules</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.05.17</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>pu</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/css/">css</a>
+  </span>
+
+
+
+      
+
+      
+
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="概念和作用"><a href="#概念和作用" class="headerlink" title="概念和作用"></a>概念和作用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">css Modules 是在css中加入了局部作用域和模块化依赖</div></pre></td></tr></table></figure>
+<h1 id="vue中的使用"><a href="#vue中的使用" class="headerlink" title="vue中的使用"></a>vue中的使用</h1><h2 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">    &lt;div class=&quot;app&quot;&gt;</div><div class="line">        // html 中使用css的名</div><div class="line">        &lt;div :class=&quot;$style.fontColor&quot;&gt;css Module&lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line">&lt;script&gt;&lt;/script&gt;</div><div class="line">&lt;style rel=&quot;stylesheet/scss&quot; lang=&quot;scss&quot; module&gt;</div><div class="line">    .fontColor&#123;</div><div class="line">        color: palegreen;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<h2 id="定义全局样式"><a href="#定义全局样式" class="headerlink" title="定义全局样式"></a>定义全局样式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">    &lt;div class=&quot;app&quot;&gt;</div><div class="line">        // html 中使用css的名</div><div class="line">        &lt;div class=&quot;fontColor&quot;&gt;css Module&lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line">&lt;script&gt;&lt;/script&gt;</div><div class="line">&lt;style rel=&quot;stylesheet/scss&quot; lang=&quot;scss&quot; module&gt;</div><div class="line">    :global(.fontColor)&#123;</div><div class="line">        color: palegreen;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<h2 id="css属性继承"><a href="#css属性继承" class="headerlink" title="css属性继承"></a>css属性继承</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">    &lt;div class=&quot;app&quot;&gt;</div><div class="line">        // html 中使用css的名</div><div class="line">        &lt;div :class=&quot;$style.fontColor&quot;&gt;css Module&lt;/div&gt;</div><div class="line">        &lt;div :class=&quot;$style.colorInherit&quot;&gt;css Module&lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line">&lt;script&gt;&lt;/script&gt;</div><div class="line">&lt;style rel=&quot;stylesheet/scss&quot; lang=&quot;scss&quot; module&gt;</div><div class="line">    .fontColor&#123;</div><div class="line">        color: palegreen;</div><div class="line">    &#125;</div><div class="line">    .colorInherit&#123;</div><div class="line">        composes: fontColor;</div><div class="line">        font-size: 24px;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<h2 id="继承其他模块的值"><a href="#继承其他模块的值" class="headerlink" title="继承其他模块的值"></a>继承其他模块的值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">    &lt;div class=&quot;app&quot;&gt;</div><div class="line">        // html 中使用css的名</div><div class="line">        &lt;div :class=&quot;$style.fontColor&quot;&gt;css Module&lt;/div&gt;</div><div class="line">        &lt;div :class=&quot;$style.colorInherit&quot;&gt;css Module&lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line">&lt;script&gt;&lt;/script&gt;</div><div class="line">&lt;style rel=&quot;stylesheet/scss&quot; lang=&quot;scss&quot; module&gt;</div><div class="line">    .fontColor&#123;</div><div class="line">        color: palegreen;</div><div class="line">    &#125;</div><div class="line">    .colorInherit&#123;</div><div class="line">        composes: fontColors from &apos;./common.css&apos;;</div><div class="line">        font-size: 24px;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<h2 id="使用变量"><a href="#使用变量" class="headerlink" title="使用变量"></a>使用变量</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">    &lt;div class=&quot;app&quot;&gt;</div><div class="line">        // html 中使用css的名</div><div class="line">        &lt;div :class=&quot;$style.fontColor&quot;&gt;css Module&lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    export default &#123;</div><div class="line">        created () &#123;</div><div class="line">            console.log(this.$style)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;style rel=&quot;stylesheet/scss&quot; lang=&quot;scss&quot; module&gt;</div><div class="line">    $common-color: palegreen;</div><div class="line">    .fontColor&#123;</div><div class="line">        color: $common-color;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+    
+  </div>
+</article>
+
+
+   
+
+   <!-- 
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/05/04/Http中的缓存/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/06/12/storage事件/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+ -->
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+
+
+
+    
+
+    
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
